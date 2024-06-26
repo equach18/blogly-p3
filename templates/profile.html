@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}User Details{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-4">
+        <img src="{{user.image_url}}">
+    </div>
+    <div class="col-md-4">
+        <h1>{{user.first_name}} {{user.last_name}}</h1>
+        <form>
+            <button formaction="/users/{{user.id}}/edit" class="btn btn-primary">Edit</button>
+            <button formaction="/users/{{user.id}}/delete" formmethod="POST" class="btn btn-danger">Delete</button>
+        </form>
+    </div>
+</div>
+<div class="row justify-content-center">
+    <div class="col-md-3">
+        <h2>Posts</h2>
+        <ul>
+            {% for post in user.posting %}
+                {% if post.title %}
+                <li><a href="/posts/{{post.id}}">{{post.title}}</a></li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+        <form>
+            <button formaction="/users/{{user.id}}/posts/new" class="btn btn-primary">Add Post</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

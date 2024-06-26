@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}New Post Form{% endblock %}
+
+{% block content %}
+<h1>Add Post for {{user.first_name}} {{user.last_name}}</h1>
+<form method="POST">
+    <div class="form-group row">
+        <label for="title" class="col-sm-2 col-form-label">Title</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="title" name="title" placeholder="Add your title here!">
+        </div>    
+        <label for="content" class="col-sm-2 col-form-label">Post Content</label>
+        <div class="col-sm-10">
+            <textarea class="form-control" id="content" name="content" placeholder="Add your content here!"></textarea>
+        </div>      
+    </div>
+    <div class="form-check">
+        {% for tag in tags %}
+        <div>
+            <input type="checkbox" name="tags" class="form-check-input" value="{{tag.id}}" id="tag_{{tag.id}}">
+            <label for="tag_{{tag.id}}" class="form-check-label">{{tag.name}}</label>
+        </div>
+        {% endfor %}
+    </div>
+    <div>
+        <button formaction="/users/{{user.id}}" formmethod="GET" class="btn btn-info">Cancel</button>
+        <button formaction="/users/{{user.id}}/posts/new" formmethod="POST" class="btn btn-success">Add</button>
+    </div>
+</form>
+
+
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %}Post Edit Page{% endblock %}
+
+{% block content %}
+<h1>Edit Post:</h1>
+<form action="/users/new" method="POST">
+    <div class="form-group row">
+        <label for="title" class="col-sm-2 col-form-label">Title</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="title" name="title" placeholder="{{post.title}}">
+        </div>    
+        <label for="content" class="col-sm-2 col-form-label">Post Content</label>
+        <div class="col-sm-10">
+            <textarea class="form-control" id="content" name="content" placeholder="{{post.content}}"></textarea>
+        </div>    
+    </div>
+    <div class="form-check">
+        {% for tag in tags %}
+            {% if tag in post.tags %}
+            <div>
+                <input type="checkbox" name="tags" class="form-check-input" value="{{tag.id}}" id="tag_{{tag.id}}" checked>
+                <label for="tag_{{tag.id}}" class="form-check-label">{{tag.name}}</label>
+            </div>
+            {% else %}
+            <div>
+                <input type="checkbox" name="tags" class="form-check-input" value="{{tag.id}}" id="tag_{{tag.id}}">
+                <label for="tag_{{tag.id}}" class="form-check-label">{{tag.name}}</label>
+            </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+    <div>
+        <button formaction="/users/{{post.poster.id}}" formmethod="GET" class="btn btn-outline-primary">Cancel</button>
+        <button formaction="/posts/{{post.id}}/edit" formmethod="POST" class="btn btn-success">Save</button>
+    </div>
+</form>
+
+
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}User Edit Form{% endblock %}
+
+{% block content %}
+<h1>Edit User:</h1>
+<form action="/users/new" method="POST" class="row g-3">
+    <div class="col-12">
+        <label for="first-name" class="col-sm-4 col-form-label">First Name:</label>
+        <input type="text" class="form-control" id="first-name" name="first-name" placeholder="{{user.first_name}}">
+    </div>    
+    <div class="col-12">
+        <label for="last-name" class="col-sm-4 col-form-label">Last Name:</label>
+        <input type="text" class="form-control" id="last-name" name="last-name" placeholder="{{user.last_name}}">
+    </div>    
+    <div class="col-12">
+        <label for="img-url" class="col-sm-4 col-form-label">Image URL:</label>
+        <input type="text" class="form-control" id="img-url" name="img-url" placeholder="{{user.image_url}}">
+    </div>    
+    <form class="col-6">
+        <button formaction="/users/{{user.id}}" formmethod="GET" class="btn btn-secondary">Cancel</button>
+        <button formaction="/users/{{user.id}}/edit" formmethod="POST" class="btn btn-success">Save</button>
+    </form>
+</form>
+
+
+{% endblock %}
